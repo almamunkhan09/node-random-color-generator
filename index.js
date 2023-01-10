@@ -51,8 +51,8 @@ function printColor(hue, luminosity) {
 // valid colors are blue,green,red
 // valid luminosities are bright , light,dark
 
-let inputHue = !process.argv[2] ? '' : process.argv[2].toLowerCase();
-let inputLuminosity = !process.argv[3] ? '' : process.argv[3].toLowerCase();
+const inputHue = !process.argv[2] ? '' : process.argv[2].toLowerCase();
+const inputLuminosity = !process.argv[3] ? '' : process.argv[3].toLowerCase();
 
 // check if the user type ask instead of color
 
