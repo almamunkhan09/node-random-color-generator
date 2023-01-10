@@ -62,8 +62,7 @@ if (inputHue === 'ask') {
   const luminosity = (
     await rl.question('How luminosity do you need? ')
   ).toLowerCase();
-  console.log(hue, luminosity);
-  console.log(validHue.includes(hue));
+
   rl.close();
   printColor(hue, luminosity);
   process.exit();
