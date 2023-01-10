@@ -1,3 +1,5 @@
+import { stdin as input, stdout as output } from 'node:process';
+import * as readline from 'node:readline/promises';
 // import packages
 import chalk from 'chalk';
 import randomcolor from 'randomcolor';
@@ -17,34 +19,54 @@ const validLuminosity = ['', 'bright', 'dark', 'light'];
 const generateRandomColor = (inputHeu, inputLuminosity) => {
   return randomcolor({ hue: inputHeu, luminosity: inputLuminosity });
 };
+// function for print color
+
+function printColor(hue, luminosity) {
+  if (!validHue.includes(hue)) {
+    console.log(error(hueError)); // provide error message if the color is not valid
+  } else if (!validLuminosity.includes(luminosity)) {
+    console.log(error(luminosityError)); //provide error message if the luminosity is not valid
+  } else {
+    const randomColor = generateRandomColor(hue, luminosity);
+    // console.log(randomColor); //// to check if the generateRandomColor is working
+
+    // Initialze the output that should look like
+
+    const outputString = ` ###############################
+  ###############################
+  ###############################
+  #####                     #####
+  #####       ${randomColor}       #####
+  #####                     #####
+  ###############################
+  ###############################
+  ###############################`;
+
+    const consoleColor = chalk.hex(randomColor); // defines the color to output
+    console.log('\n', consoleColor(outputString));
+  }
+}
 
 // checking if the user input is valid
 // valid colors are blue,green,red
 // valid luminosities are bright , light,dark
 
-const inputHue = !process.argv[2] ? '' : process.argv[2].toLowerCase();
-const inputLuminosity = !process.argv[3] ? '' : process.argv[3].toLowerCase();
+let inputHue = !process.argv[2] ? '' : process.argv[2].toLowerCase();
+let inputLuminosity = !process.argv[3] ? '' : process.argv[3].toLowerCase();
 
-if (!validHue.includes(inputHue)) {
-  console.log(error(hueError)); // provide error message if the color is not valid
-} else if (!validLuminosity.includes(inputLuminosity)) {
-  console.log(error(luminosityError)); //provide error message if the luminosity is not valid
-} else {
-  const randomColor = generateRandomColor(inputHue, inputLuminosity);
-  // console.log(randomColor); //// to check if the generateRandomColor is working
+// check if the user type ask instead of color
 
-  // Initialze the output that should look like
-
-  const outputString = `###############################
-###############################
-###############################
-#####                     #####
-#####       ${randomColor}       #####
-#####                     #####
-###############################
-###############################
-###############################`;
-
-  const consoleColor = chalk.hex(randomColor); // defines the color to output
-  console.log(consoleColor(outputString));
+if (inputHue === 'ask') {
+  const rl = readline.createInterface({ input, output });
+  const inputHeu = (await rl.question('What color do you want?')).toLowerCase();
+  const inputLuminosity = (
+    await rl.question('How luminosity do you need? ')
+  ).toLowerCase();
+  console.log(inputHeu, inputLuminosity);
+  // console.log(!validHue.includes(inputHue));
+  rl.close();
+  printColor(inputHeu, inputLuminosity);
+  process.exit();
 }
+
+printColor(inputHue, inputLuminosity);
