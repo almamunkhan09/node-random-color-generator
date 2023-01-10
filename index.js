@@ -25,7 +25,7 @@ function printColor(hue, luminosity) {
   if (!validHue.includes(hue)) {
     console.log(error(hueError)); // provide error message if the color is not valid
   } else if (!validLuminosity.includes(luminosity)) {
-    console.log(error(luminosityError)); //provide error message if the luminosity is not valid
+    console.log(error(luminosityError)); // provide error message if the luminosity is not valid
   } else {
     const randomColor = generateRandomColor(hue, luminosity);
     // console.log(randomColor); //// to check if the generateRandomColor is working
@@ -58,14 +58,14 @@ const inputLuminosity = !process.argv[3] ? '' : process.argv[3].toLowerCase();
 
 if (inputHue === 'ask') {
   const rl = readline.createInterface({ input, output });
-  const inputHeu = (await rl.question('What color do you want?')).toLowerCase();
-  const inputLuminosity = (
+  const hue = (await rl.question('What color do you want?')).toLowerCase();
+  const luminosity = (
     await rl.question('How luminosity do you need? ')
   ).toLowerCase();
-  console.log(inputHeu, inputLuminosity);
-  // console.log(!validHue.includes(inputHue));
+  console.log(hue, luminosity);
+  console.log(validHue.includes(hue));
   rl.close();
-  printColor(inputHeu, inputLuminosity);
+  printColor(hue, luminosity);
   process.exit();
 }
 
