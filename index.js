@@ -32,18 +32,18 @@ function printColor(hue, luminosity) {
 
     // Initialze the output that should look like
 
-    const outputString = ` ###############################
+    const outputString = `  ###############################
   ###############################
   ###############################
   #####                     #####
-  #####       ${randomColor}       #####
+  #####       ${randomColor}       a####
   #####                     #####
   ###############################
   ###############################
   ###############################`;
 
-    const consoleColor = chalk.hex(randomColor); // defines the color to output
-    console.log('\n', consoleColor(outputString));
+    const consoleColor = chalk.hex(randomColor).bold; // defines the color to output
+    console.log(consoleColor(outputString));
   }
 }
 
